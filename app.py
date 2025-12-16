@@ -1,8 +1,9 @@
 from flask import Flask, render_template
+import requests
 
 app = Flask(__name__)
 
-ESP32_URL = "http://192.168.1.100"  # change to ESP32 IP
+ESP32_URL = "http://192.168.1.100"  # ESP32 local IP
 
 
 @app.route("/")
