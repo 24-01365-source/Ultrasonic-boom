@@ -34,7 +34,7 @@ def index():
 
     return render_template("index.html", distance=distance)
 
-if __name__ == "__main__":
+if     __name__ == "__main__":
 from flask import Flask, render_template
 import time
 
