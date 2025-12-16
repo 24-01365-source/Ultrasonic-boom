@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-import request
 import time
 
 app = Flask(__name__)
@@ -19,7 +18,6 @@ def index():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 from flask import Flask, render_template
-import requests
 import time
 
 app = Flask(__name__)
@@ -40,7 +38,6 @@ if __name__ == "__main__":
 
  HEAD
 from flask import Flask, render_template
-import requests
 import time
 
 app = Flask(__name__)
@@ -60,7 +57,6 @@ def index():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 from flask import Flask, render_template
-import requests
 import time
 
 app = Flask(__name__)
