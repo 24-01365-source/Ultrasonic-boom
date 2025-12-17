@@ -1,31 +1,23 @@
-from flask import Flask, request, jsonify, render_template
-import json
-import os
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-DB_FILE = "distance.json"
 
-# Ensure the JSON file exists
-if not os.path.exists(DB_FILE):
-    with open(DB_FILE, "w") as f:
-        json.dump({"distance": 0}, f)
+current_distance = 0.0
 
 @app.route("/")
 def index():
-    # Read the latest distance from JSON
-    with open(DB_FILE) as f:
-        data = json.load(f)
-    distance = data.get("distance", 0)
-    return render_template("index.html", distance=distance)
+    return render_template("index.html")
 
-@app.route("/update", methods=["POST"])
-def update():
-    data = request.get_json()
-    distance = data.get("distance", 0)
-    # Save distance to JSON file
-    with open(DB_FILE, "w") as f:
-        json.dump({"distance": distance}, f)
-    return jsonify({"status": "ok"})
+@app.route("/api/update_distance", methods=["POST"])
+def update_distance():
+    global current_distance
+    try:
+        data = request.get_json()
+        current_distance = float(data["distance"])
+        return jsonify({"status": "ok"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+@app.route("/api/get_distance", methods=["GET"])
+def get_distance():
+    return jsonify({"distance": current_distance})
